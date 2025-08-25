@@ -11,11 +11,13 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
+
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
-const URI = process.env.URI;
+const URI ='mongodb+srv://animesbarman101:AnimeS0000@cluster0.26qzwj8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 app.get('/', (req, res) => {
   res.send('ok server is running');
