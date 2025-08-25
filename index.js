@@ -4,7 +4,9 @@ require('dotenv').config();
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "*"   // 👉 সব origin allow করবে (production এ চাইলে নির্দিষ্ট domain দিন)
+}));
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
@@ -28,7 +30,7 @@ const client = new MongoClient(URI, {
 
 async function run() {
   try {
-    await client.connect();
+    // await client.connect();
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
@@ -52,7 +54,7 @@ async function run() {
     })
 
     app.get('/users',async (req,res)=>{
-      
+
           const result = await testCLR.find().toArray();
           
           if(result){
@@ -70,6 +72,8 @@ async function run() {
 
 run();
 
-app.listen(3000, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// app.listen(3000, () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });
+
+module.exports=app;
