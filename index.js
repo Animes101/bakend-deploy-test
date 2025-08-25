@@ -4,9 +4,13 @@ require('dotenv').config();
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
 const app = express();
-app.use(cors({
-  origin: "*"   // 👉 সব origin allow করবে (production এ চাইলে নির্দিষ্ট domain দিন)
-}));
+app.use(
+  cors({
+    origin: "*", // সব origin allow করলো
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
